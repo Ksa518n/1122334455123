@@ -1,22 +1,17 @@
-FROM n8nio/n8n:latest
+# استخدم صورة n8n الرسمية
+FROM n8nio/n8n
 
-# تفعيل الحماية باسم مستخدم وكلمة مرور
-ENV N8N_BASIC_AUTH_ACTIVE="true"
-ENV N8N_BASIC_AUTH_USER="admin"
-ENV N8N_BASIC_AUTH_PASSWORD="admin518"
+# تحديد المنطقة الزمنية
+ENV GENERIC_TIMEZONE="Asia/Riyadh"
 
-# إعدادات الشبكة والمنفذ
-ENV N8N_HOST="0.0.0.0"
-ENV N8N_PORT="5678"
+# إعداد مسار تخزين البيانات (اختياري في بعض الحالات)
+ENV N8N_USER_FOLDER="/home/node/.n8n"
 
-# رابط الـ Webhook (غيّره للرابط الخاص بك على Render)
-ENV WEBHOOK_URL="https://one122334455123.onrender.com/"
+# تأكد من أن المتغيرات تقرأ من البيئة (Render يضبطها تلقائياً من Environment)
+# ما تحتاج تضيف أي أسرار هنا داخل الـ Dockerfile
 
-# إعدادات قاعدة البيانات PostgreSQL
-ENV DB_TYPE="postgresdb"
-ENV DB_POSTGRESDB_CONNECTION_URL="postgresql://postgres.ovttdrlvvtvvnvvdjmav:Asd050427%40ksa@aws-0-eu-west-2.pooler.supabase.com:6543/postgres"
-
-# تفعيل الـ Task Runners لتجنب التنبيهات المستقبلية
-ENV N8N_RUNNERS_ENABLED="true"
-
+# تعيين منفذ التشغيل الافتراضي لـ n8n
 EXPOSE 5678
+
+# تشغيل n8n
+CMD ["n8n"]
